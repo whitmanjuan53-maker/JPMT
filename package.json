@@ -1,0 +1,11 @@
+{
+  "name": "jpmt-logistics",
+  "version": "1.0.0",
+  "description": "JPMT Logistics - Midwest Freight & Logistics",
+  "scripts": {
+    "build": "echo 'Static site - no build required'"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
