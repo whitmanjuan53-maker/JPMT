@@ -197,6 +197,9 @@ a {
   max-width: 180px;
   object-fit: contain;
   flex-shrink: 0;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px 8px;
 }
 
 .nav {
@@ -415,6 +418,27 @@ a {
   margin-top: var(--space-1);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 50px;
+  padding: var(--space-2) var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.hero-badge svg {
+  flex-shrink: 0;
+}
+
+.hero-badge span {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #22c55e;
 }
 
 /* ============================================
@@ -2597,6 +2621,8 @@ a {
   .logo-img {
     height: 40px;
     max-width: 140px;
+    padding: 3px 6px;
+    border-radius: 6px;
   }
   
   /* Page header - reduce vertical space */
@@ -2684,6 +2710,15 @@ a {
   
   .stats span {
     font-size: 10px;
+  }
+  
+  .hero-badge {
+    margin-top: 16px;
+    padding: 8px 12px;
+  }
+  
+  .hero-badge span {
+    font-size: 12px;
   }
   
   /* Section spacing reduction */
@@ -3558,6 +3593,8 @@ a {
   .logo-img {
     height: 36px;
     max-width: 120px;
+    padding: 2px 5px;
+    border-radius: 5px;
   }
   
   /* Hero ultra-compact */
