@@ -20,15 +20,24 @@
       <a href="index.html" class="logo">
         <img src="images/logo.png?v=2" alt="JPMT Trucking Co." class="logo-img">
       </a>
-      <nav class="nav">
+      <nav class="nav" id="primary-nav" aria-label="Primary">
         <a href="services.html">Services</a>
         <a href="coverage.html">Coverage</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html" class="active">Contact</a>
+        <a href="track.html">Track</a>
       </nav>
-      <a href="contact.html" class="btn btn-primary">Get Quote</a>
+      <div class="header-actions">
+        <button type="button" class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <a href="contact.html" class="btn btn-primary">Get Quote</a>
+      </div>
     </div>
   </header>
+  <div class="nav-backdrop" aria-hidden="true"></div>
 
   <!-- Hero Section -->
   <section class="contact-hero">
@@ -54,7 +63,7 @@
             </svg>
           </div>
           <h3>Sales & Quotes</h3>
-          <a href="tel:1-800-JPMT-SHIP" class="contact-link">1-800-JPMT-SHIP</a>
+          <a href="tel:+18005768744" class="contact-link">1-800-JPMT-SHIP</a>
           <span class="contact-email">sales@jpmtlogistics.com</span>
         </div>
         <div class="contact-info-card">
@@ -65,8 +74,24 @@
             </svg>
           </div>
           <h3>Dispatch & Support</h3>
-          <span class="badge-24h">24/7 Available</span>
-          <a href="tel:1-800-JPMT-SHIP" class="contact-link">1-800-JPMT-SHIP</a>
+          <a href="track.html" class="track-btn" style="margin-top: 16px; display: inline-flex;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          Track Your Shipment
+        </a>
+      </div>
+      <div class="contact-info-card">
+        <div class="contact-icon blue">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Track Shipment</h3>
+        <span class="badge-24h">Real-time Updates</span>
+          <a href="tel:+18005768744" class="contact-link">1-800-JPMT-SHIP</a>
           <span class="contact-email">dispatch@jpmtlogistics.com</span>
         </div>
         <div class="contact-info-card">
@@ -119,65 +144,66 @@
           </ul>
         </div>
         <div class="quote-form-box">
-          <form class="polished-form">
+          <form class="polished-form" id="quote-request-form" action="contact.html" method="get">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Full Name *</label>
-                <input type="text" id="name" placeholder="John Smith" required>
+                <input type="text" id="name" name="name" autocomplete="name" placeholder="John Smith" required>
               </div>
               <div class="form-group">
                 <label for="company">Company</label>
-                <input type="text" id="company" placeholder="Acme Inc.">
+                <input type="text" id="company" name="company" autocomplete="organization" placeholder="Acme Inc.">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email *</label>
-                <input type="email" id="email" placeholder="john@company.com" required>
+                <input type="email" id="email" name="email" autocomplete="email" placeholder="john@company.com" required>
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="tel" id="phone" placeholder="(555) 123-4567">
+                <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 123-4567" pattern="^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$" title="US phone number, e.g. (555) 123-4567">
               </div>
             </div>
             <div class="form-divider"></div>
             <div class="form-row">
               <div class="form-group">
                 <label for="origin">Origin ZIP *</label>
-                <input type="text" id="origin" placeholder="60601" required>
+                <input type="text" id="origin" name="origin_zip" inputmode="numeric" pattern="^\d{5}(-\d{4})?$" maxlength="10" placeholder="60601" title="5-digit or ZIP+4 US postal code" required>
               </div>
               <div class="form-group">
                 <label for="dest">Destination ZIP *</label>
-                <input type="text" id="dest" placeholder="43215" required>
+                <input type="text" id="dest" name="dest_zip" inputmode="numeric" pattern="^\d{5}(-\d{4})?$" maxlength="10" placeholder="43215" title="5-digit or ZIP+4 US postal code" required>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="equipment">Equipment Type</label>
-                <select id="equipment">
-                  <option>Dry Van</option>
-                  <option>Reefer</option>
-                  <option>Flatbed</option>
-                  <option>Other</option>
+                <select id="equipment" name="equipment">
+                  <option value="dry_van">Dry Van</option>
+                  <option value="reefer">Reefer</option>
+                  <option value="flatbed">Flatbed</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="frequency">Shipping Frequency</label>
-                <select id="frequency">
-                  <option>One-time</option>
-                  <option>Weekly</option>
-                  <option>Monthly</option>
-                  <option>Project-based</option>
+                <select id="frequency" name="frequency">
+                  <option value="one_time">One-time</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="project">Project-based</option>
                 </select>
               </div>
             </div>
             <div class="form-group full-width">
               <label for="details">Shipment Details</label>
-              <textarea id="details" rows="4" placeholder="Tell us about your freight: weight, dimensions, special requirements, preferred pickup/delivery times, etc."></textarea>
+              <textarea id="details" name="details" rows="4" placeholder="Tell us about your freight: weight, dimensions, special requirements, preferred pickup/delivery times, etc."></textarea>
             </div>
-            <button type="submit" class="btn btn-submit-large">
+            <p id="quote-form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+            <button type="submit" class="btn btn-submit-large" id="quote-form-submit">
               <span>Submit Quote Request</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12"/>
                 <polyline points="12 5 19 12 12 19"/>
               </svg>
@@ -201,17 +227,17 @@
           <div class="terminal-badge">HQ</div>
           <h4>Chicago, IL</h4>
           <p>4500 Logistics Parkway<br>Chicago, IL 60609</p>
-          <a href="tel:1-800-JPMT-SHIP" class="terminal-phone">1-800-JPMT-SHIP</a>
+          <a href="tel:+18005768744" class="terminal-phone">1-800-JPMT-SHIP</a>
         </div>
         <div class="terminal-card">
           <h4>Indianapolis, IN</h4>
           <p>2800 Freight Way<br>Indianapolis, IN 46241</p>
-          <a href="tel:1-800-JPMT-SHIP" class="terminal-phone">1-800-JPMT-SHIP</a>
+          <a href="tel:+18005768744" class="terminal-phone">1-800-JPMT-SHIP</a>
         </div>
         <div class="terminal-card">
           <h4>Columbus, OH</h4>
           <p>5900 Distribution Blvd<br>Columbus, OH 43217</p>
-          <a href="tel:1-800-JPMT-SHIP" class="terminal-phone">1-800-JPMT-SHIP</a>
+          <a href="tel:+18005768744" class="terminal-phone">1-800-JPMT-SHIP</a>
         </div>
       </div>
     </div>
@@ -227,10 +253,10 @@
           </a>
           <p class="footer-tagline">Precision logistics for the modern supply chain.</p>
           <div class="footer-social">
-            <a href="#" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
-            <a href="#" aria-label="Twitter">
+            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
             </a>
           </div>
@@ -265,5 +291,6 @@
     </div>
   </footer>
 
+  <script src="site.js" defer></script>
 </body>
 </html>

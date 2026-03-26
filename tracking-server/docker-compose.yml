@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: jpmt-postgres
+    environment:
+      POSTGRES_DB: jpmt_tracking
+      POSTGRES_USER: jpmt_user
+      POSTGRES_PASSWORD: jpmt_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./src/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jpmt_user -d jpmt_tracking"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jpmt-network
+
+  # Redis Cache & Queue
+  redis:
+    image: redis:7-alpine
+    container_name: jpmt-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jpmt-network
+
+  # Tracking API Server
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jpmt-api
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: jpmt_tracking
+      DB_USER: jpmt_user
+      DB_PASSWORD: jpmt_password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      API_KEY_SECRET: ${API_KEY_SECRET:-change-me-in-production}
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - jpmt-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx Reverse Proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: jpmt-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../:/usr/share/nginx/html:ro
+    depends_on:
+      - api
+    networks:
+      - jpmt-network
+    restart: unless-stopped
+    profiles:
+      - with-nginx
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  jpmt-network:
+    driver: bridge

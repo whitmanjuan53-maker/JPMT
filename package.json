@@ -1,11 +1,26 @@
 {
   "name": "jpmt-logistics",
   "version": "1.0.0",
-  "description": "JPMT Logistics - Midwest Freight & Logistics",
+  "description": "JPMT Logistics - Midwest Freight & Logistics with Real-Time Shipment Tracking",
   "scripts": {
-    "build": "echo 'Static site - no build required'"
+    "build": "echo 'Static site - no build required'",
+    "start": "echo 'Open index.html in a browser or use a static server'",
+    "server": "npx serve -l 3000",
+    "tracking-server": "cd tracking-server && npm run dev",
+    "docker:up": "cd tracking-server && docker-compose up -d",
+    "docker:down": "cd tracking-server && docker-compose down"
   },
   "engines": {
     "node": "18.x"
-  }
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
+  },
+  "keywords": [
+    "logistics",
+    "tracking",
+    "shipment",
+    "freight",
+    "real-time"
+  ]
 }
