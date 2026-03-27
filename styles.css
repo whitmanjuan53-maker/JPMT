@@ -446,12 +446,22 @@ body.nav-open .nav-backdrop {
   background: var(--color-bg-dark);
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+}
+
 .hero-content h1 {
   font-size: var(--text-9xl);
   font-weight: 800;
   line-height: 1.05;
   margin-bottom: var(--space-6);
   letter-spacing: -0.03em;
+  width: 100%;
 }
 
 .hero-content h1 .blue { 
