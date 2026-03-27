@@ -441,6 +441,7 @@ body.nav-open .nav-backdrop {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: var(--space-20) var(--space-16);
   background: var(--color-bg-dark);
 }
@@ -526,11 +527,14 @@ body.nav-open .nav-backdrop {
 .stats {
   display: flex;
   gap: var(--space-10);
+  justify-content: center;
 }
 
 .stats > div { 
   display: flex; 
   flex-direction: column; 
+  align-items: center;
+  text-align: center;
 }
 
 .stats strong {
@@ -557,6 +561,7 @@ body.nav-open .nav-backdrop {
   border-radius: 50px;
   padding: var(--space-2) var(--space-4);
   margin-top: var(--space-6);
+  align-self: center;
 }
 
 .hero-badge svg {
