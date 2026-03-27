@@ -11,7 +11,7 @@
     "docker:down": "cd tracking-server && docker-compose down"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "devDependencies": {
     "serve": "^14.2.6"
